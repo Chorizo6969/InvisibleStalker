@@ -16,6 +16,13 @@ public class PhotoCapture : MonoBehaviour
 
     public int NombreOfPellicule;
 
+    public static PhotoCapture Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         if (_photoCamera != null)

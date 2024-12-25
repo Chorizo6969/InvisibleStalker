@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +5,20 @@ public class Pellicules : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _nomberOfPellicules;
-    [SerializeField]
-    private int _nomberPhotoPossible;
+
     [SerializeField]
     private PhotoCapture _photoCapture;
+
+    [SerializeField]
+    private GameObject _outOfPicture;
+
+    public int NomberPhotoPossible;
+    public static Pellicules Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -19,12 +27,15 @@ public class Pellicules : MonoBehaviour
 
     public void UpdatePhoto()
     {
-        _nomberPhotoPossible = _photoCapture.NombreOfPellicule;
-        _nomberOfPellicules.text = _nomberPhotoPossible.ToString();
-    }
-
-    private void AugmentePhoto()
-    {
-
+        NomberPhotoPossible = _photoCapture.NombreOfPellicule;
+        _nomberOfPellicules.text = NomberPhotoPossible.ToString();
+        if(NomberPhotoPossible == 0)
+        {
+            _outOfPicture.SetActive(true);
+        }
+        else
+        {
+            _outOfPicture.SetActive(false);
+        }
     }
 }
