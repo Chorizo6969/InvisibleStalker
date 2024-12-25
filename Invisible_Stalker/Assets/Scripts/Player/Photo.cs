@@ -4,56 +4,83 @@ using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    public Camera photoCamera;
-    public RenderTexture renderTexture;
-    public RawImage photoDisplay; 
+    [SerializeField]
+    private Camera _photoCamera;
 
-    private Texture2D capturedPhoto;
+    [SerializeField]
+    private RenderTexture _renderTexture;
+
+    [SerializeField]
+    private RawImage _photoDisplay;
+
+    [SerializeField]
+    private Texture2D _capturedPhoto;
+
+    [SerializeField]
+    private bool _appareilOn = false;
 
     private void Start()
     {
-        photoCamera.targetTexture = renderTexture;
+        _photoCamera.targetTexture = _renderTexture;
 
-        if (photoCamera.targetTexture != renderTexture)
+        if (_photoCamera.targetTexture != _renderTexture)
         {
-            photoCamera.targetTexture = renderTexture;
+            _photoCamera.targetTexture = _renderTexture;
         }
 
 
-        if (photoDisplay != null)
+        if (_photoDisplay != null)
         {
-            photoDisplay.gameObject.SetActive(false);
+            _photoDisplay.gameObject.SetActive(false);
         }
     }
 
-    public void TakePhoto(InputAction.CallbackContext context)
+    public void TakePhoto(InputAction.CallbackContext context) //E
     {
         if (!context.performed) { return; }
 
+        PlayerAnimation.Instance.ChangeStatePhoto();
+        _appareilOn = true;
+    }
 
-        // Libérer la mémoire de l'ancienne texture
-        if (capturedPhoto != null)
+    public void Photo(InputAction.CallbackContext context) //ClicGauche
+    {
+        if (!context.performed) { return; }
+        if (_appareilOn)
         {
-            Destroy(capturedPhoto);
+            if (_capturedPhoto != null)
+            {
+                Destroy(_capturedPhoto);
+            }
+            RenderTexture currentRT = RenderTexture.active;
+            RenderTexture.active = _renderTexture;
+
+            _capturedPhoto = new Texture2D(_renderTexture.width, _renderTexture.height, TextureFormat.RGB24, false);
+            _capturedPhoto.ReadPixels(new Rect(0, 0, _renderTexture.width, _renderTexture.height), 0, 0);
+            _capturedPhoto.Apply();
+            RenderTexture.active = currentRT;
+
+            if (_photoDisplay != null)
+            {
+                _photoDisplay.texture = _capturedPhoto;
+                _photoDisplay.gameObject.SetActive(true);
+            }
+
+            Debug.Log("Photo capturée et affichée à l'écran.");
+            PlayerAnimation.Instance.CancelledStatePhoto();
+            _appareilOn = false;
         }
 
 
-        RenderTexture currentRT = RenderTexture.active;
-        RenderTexture.active = renderTexture;
+    }
 
-        capturedPhoto = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGB24, false);
-        capturedPhoto.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-        capturedPhoto.Apply();
-
-        RenderTexture.active = currentRT;
-
-
-        if (photoDisplay != null)
+    private void Update()
+    {
+        if (!_appareilOn) { return ; }
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            photoDisplay.texture = capturedPhoto;
-            photoDisplay.gameObject.SetActive(true);
+            _appareilOn = false;
+            PlayerAnimation.Instance.CancelledStatePhoto();
         }
-
-        Debug.Log("Photo capturée et affichée à l'écran.");
     }
 }
