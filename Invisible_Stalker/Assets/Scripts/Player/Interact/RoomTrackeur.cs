@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class RoomTracker : MonoBehaviour
 {
-    private string currentRoom;
+    private string _currentRoom;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Room"))
         {
-            currentRoom = other.gameObject.name;
-            Debug.Log($"Joueur est dans la pièce : {currentRoom}");
+            _currentRoom = other.gameObject.name;
+            Debug.Log($"Joueur est dans la pièce : {_currentRoom}");
         }
     }
 
     public string GetCurrentRoom()
     {
-        return currentRoom;
+        return _currentRoom;
     }
 }

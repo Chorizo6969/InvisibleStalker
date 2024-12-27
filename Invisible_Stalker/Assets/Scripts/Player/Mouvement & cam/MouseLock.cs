@@ -3,20 +3,23 @@ using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
-    public float sensitivity = 15;
-    public Transform _cam;
+    [SerializeField]
+    private float _sensitivity = 15;
 
-    private Vector2 mouseDelta;
+    [SerializeField]
+    private Transform _cam;
 
-    private float xRotation = 0f;
-    private float yRotation = 0f;
+    private Vector2 _mouseDelta;
+
+    private float _xRotation = 0f;
+    private float _yRotation = 0f;
 
     public void OnMouseLookPerformed(InputAction.CallbackContext context)
     {
-        mouseDelta = context.ReadValue<Vector2>();
+        _mouseDelta = context.ReadValue<Vector2>();
         if (context.canceled)
         {
-            mouseDelta = Vector2.zero;
+            _mouseDelta = Vector2.zero;
         }
     }
 
@@ -28,16 +31,16 @@ public class MouseLook : MonoBehaviour
     private void RotateView()
     {
         // Appliquer la rotation de la souris à la caméra
-        float mouseX = mouseDelta.x * sensitivity * Time.deltaTime;
-        float mouseY = mouseDelta.y * sensitivity * Time.deltaTime;
+        float mouseX = _mouseDelta.x * _sensitivity * Time.deltaTime;
+        float mouseY = _mouseDelta.y * _sensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limite pour éviter de regarder "à l'envers"
+        _xRotation -= mouseY;
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f); // Limite pour éviter de regarder "à l'envers"
 
-        yRotation += mouseX;
+        _yRotation += mouseX;
         //cam
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
         //player
-        _cam.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        _cam.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
     }
 }
