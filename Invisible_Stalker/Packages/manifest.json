@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.hauntedpsx.render-pipelines.psx": "https://github.com/pastasfuture/com.hauntedpsx.render-pipelines.psx.git",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.cinemachine": "2.10.3",
     "com.unity.collab-proxy": "2.6.0",
@@ -9,8 +8,6 @@
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.11.2",
     "com.unity.probuilder": "5.2.3",
-    "com.unity.render-pipelines.high-definition": "14.0.7",
-    "com.unity.render-pipelines.universal": "14.0.7",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.7",
     "com.unity.timeline": "1.7.6",
