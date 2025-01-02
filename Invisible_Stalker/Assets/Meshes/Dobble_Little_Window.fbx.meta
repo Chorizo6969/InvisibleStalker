@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1cdcca97d8573024f89af5e8f1e22bd5
+guid: 5678935ef8d195b45b8fa9af042f1232
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Red_Texture
-    second: {fileID: 2100000, guid: 3be17768c2ab849439de57bb96d8c42c, type: 2}
+      name: Wall_texture
+    second: {fileID: 2100000, guid: 1a4f00ec596a45840bb7cfdea54d58db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
