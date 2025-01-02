@@ -61,20 +61,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   isFrameLimitEnabled:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   frameLimit:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 24
   aspectMode:
     m_OverrideState: 1
     m_Value: 3
   targetRasterizationResolutionWidth:
     m_OverrideState: 1
-    m_Value: 540
+    m_Value: 240
   targetRasterizationResolutionHeight:
     m_OverrideState: 1
-    m_Value: 540
+    m_Value: 320
   isDepthBufferEnabled:
     m_OverrideState: 0
     m_Value: 1
@@ -184,6 +184,79 @@ MonoBehaviour:
   dynamicLightsMaxPerObjectCount:
     m_OverrideState: 0
     m_Value: 4
+--- !u!114 &-3159114399229863167
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdadb30f615c5d5499a6de3fe4216ef6, type: 3}
+  m_Name: SkyVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  skyMode:
+    m_OverrideState: 1
+    m_Value: 0
+  framebufferDitherWeight:
+    m_OverrideState: 0
+    m_Value: 1
+  skyRotation:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
+  textureFilterMode:
+    m_OverrideState: 0
+    m_Value: 0
+  skyboxTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  tiledLayersSkyHeightScale:
+    m_OverrideState: 0
+    m_Value: 0.25
+  tiledLayersSkyHorizonOffset:
+    m_OverrideState: 0
+    m_Value: 0
+  tiledLayersSkyColorLayer0:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  tiledLayersSkyTextureLayer0:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  tiledLayersSkyTextureScaleOffsetLayer0:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 0, w: 0}
+  tiledLayersSkyRotationLayer0:
+    m_OverrideState: 0
+    m_Value: 0
+  tiledLayersSkyScrollScaleLayer0:
+    m_OverrideState: 0
+    m_Value: {x: 0.125, y: 0.125}
+  tiledLayersSkyScrollRotationLayer0:
+    m_OverrideState: 0
+    m_Value: 0
+  tiledLayersSkyColorLayer1:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  tiledLayersSkyTextureLayer1:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  tiledLayersSkyTextureScaleOffsetLayer1:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 0, w: 0}
+  tiledLayersSkyRotationLayer1:
+    m_OverrideState: 0
+    m_Value: 0
+  tiledLayersSkyScrollScaleLayer1:
+    m_OverrideState: 0
+    m_Value: {x: -0.25, y: -0.25}
+  tiledLayersSkyScrollRotationLayer1:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &-1158838916929372383
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -202,7 +275,7 @@ MonoBehaviour:
     m_Value: 1
   contrast:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 0.5
   shoulder:
     m_OverrideState: 1
     m_Value: 1
@@ -220,7 +293,7 @@ MonoBehaviour:
     m_Value: 0.394
   saturation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   crossTalkSaturation:
     m_OverrideState: 1
     m_Value: 0.039
@@ -242,10 +315,10 @@ MonoBehaviour:
     m_Value: 1
   weight:
     m_OverrideState: 1
-    m_Value: 0.906
+    m_Value: 0.251
   accuracy:
     m_OverrideState: 1
-    m_Value: 0.83
+    m_Value: 0.276
   mode:
     m_OverrideState: 1
     m_Value: 0
@@ -275,6 +348,7 @@ MonoBehaviour:
   - {fileID: -4513492030073354507}
   - {fileID: -68154986423839013}
   - {fileID: 4858339697077939258}
+  - {fileID: -3159114399229863167}
 --- !u!114 &651435354765444964
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -410,7 +484,7 @@ MonoBehaviour:
     m_Value: 0
   noiseSaturation:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0
   grateMaskIntensityMin:
     m_OverrideState: 1
     m_Value: 0.4
@@ -425,7 +499,7 @@ MonoBehaviour:
     m_Value: 0
   vignette:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.3
 --- !u!114 &1954471738679577837
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -540,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73811fdb48dddb143add2662b3aba7bf, type: 3}
   m_Name: TerrainGrassVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   textureFilterMode:
     m_OverrideState: 1
     m_Value: 0
