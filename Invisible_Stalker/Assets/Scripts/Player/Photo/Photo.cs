@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    [SerializeField] private NavMeshMonstre _monster;
+    [SerializeField] private NavMeshInvisibleStalker _monster;
     [SerializeField] private Camera _photoCamera;
     [SerializeField] private RenderTexture _renderTexture;
     [SerializeField] private RawImage _photoDisplay;
@@ -43,15 +44,17 @@ public class PhotoCapture : MonoBehaviour
         _appareilOn = true;
     }
 
-    public void Photo(InputAction.CallbackContext context) //ClicGauche
+    public async void Photo(InputAction.CallbackContext context) //ClicGauche
     {
         if (!context.performed || !_appareilOn) return;
 
         if (NombreOfPellicule > 0)
         {
-            CapturePhoto();
+            _photoCamera.cullingMask |= 11 << LayerMask.NameToLayer("Monstre");
             PlayerAnimation.Instance.CancelledStatePhoto();
             _appareilOn = false;
+            await Task.Delay(50);
+            CapturePhoto();
 
             CheckObjectsInPhoto();
         }
@@ -108,5 +111,6 @@ public class PhotoCapture : MonoBehaviour
                 _monster.StunMonster();
             }
         }
+        _photoCamera.cullingMask &= ~(11 << LayerMask.NameToLayer("Monstre"));
     }
 }
