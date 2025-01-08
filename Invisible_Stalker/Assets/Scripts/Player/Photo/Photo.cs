@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    [SerializeField] private NavMeshMonstre _monster;
+    [SerializeField] private NavMeshInvisibleStalker _monster;
     [SerializeField] private Camera _photoCamera;
     [SerializeField] private RenderTexture _renderTexture;
     [SerializeField] private RawImage _photoDisplay;
@@ -43,15 +44,17 @@ public class PhotoCapture : MonoBehaviour
         _appareilOn = true;
     }
 
-    public void Photo(InputAction.CallbackContext context) //ClicGauche
+    public async void Photo(InputAction.CallbackContext context) //ClicGauche
     {
         if (!context.performed || !_appareilOn) return;
 
         if (NombreOfPellicule > 0)
         {
-            CapturePhoto();
+            _photoCamera.cullingMask |= 11 << LayerMask.NameToLayer("Monstre");
             PlayerAnimation.Instance.CancelledStatePhoto();
             _appareilOn = false;
+            await Task.Delay(50);
+            CapturePhoto();
 
             CheckObjectsInPhoto();
         }
@@ -104,9 +107,16 @@ public class PhotoCapture : MonoBehaviour
         {
             if (GeometryUtility.TestPlanesAABB(planes, obj.bounds))
             {
-                Debug.Log($"Object detected in photo: {obj.name}");
-                _monster.StunMonster();
+                Vector3 directionToObject = (obj.bounds.center - _photoCamera.transform.position).normalized;
+                float distanceToObject = Vector3.Distance(_photoCamera.transform.position, obj.bounds.center);
+
+                if (!Physics.Raycast(_photoCamera.transform.position, directionToObject, distanceToObject, ~_detectionLayer)) //Si le monstre est pris en photo direct
+                {
+                    _monster.StunMonster();
+                }
             }
         }
+        _photoCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Monstre"));
     }
+
 }
