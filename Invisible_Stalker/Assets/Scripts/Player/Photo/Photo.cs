@@ -107,10 +107,16 @@ public class PhotoCapture : MonoBehaviour
         {
             if (GeometryUtility.TestPlanesAABB(planes, obj.bounds))
             {
-                Debug.Log($"Object detected in photo: {obj.name}");
-                _monster.StunMonster();
+                Vector3 directionToObject = (obj.bounds.center - _photoCamera.transform.position).normalized;
+                float distanceToObject = Vector3.Distance(_photoCamera.transform.position, obj.bounds.center);
+
+                if (!Physics.Raycast(_photoCamera.transform.position, directionToObject, distanceToObject, ~_detectionLayer)) //Si le monstre est pris en photo direct
+                {
+                    _monster.StunMonster();
+                }
             }
         }
-        _photoCamera.cullingMask &= ~(11 << LayerMask.NameToLayer("Monstre"));
+        _photoCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Monstre"));
     }
+
 }

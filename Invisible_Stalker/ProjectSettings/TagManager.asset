@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Interupteur
@@ -18,7 +18,7 @@ TagManager:
   - Pupitre
   - Monstre
   - PotentialSpawn
-  - 
+  - Scarabee
   - 
   - 
   - 
