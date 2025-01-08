@@ -24,11 +24,10 @@ public class SetDestinationScarabee : MonoBehaviour
     void Update()
     {
         ApplyVerticalOscillation();
+
         if (_isFleeing) return; 
 
-        // Continuer à suivre le chemin normal si pas en fuite
         FollowPath();
-
     }
 
     public void FleeFromPlayer()
