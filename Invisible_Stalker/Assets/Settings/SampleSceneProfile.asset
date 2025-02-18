@@ -167,22 +167,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   lightingIsEnabled:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   bakedLightingMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   vertexColorLightingMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   dynamicLightingMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   dynamicLightsMaxCount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 256
   dynamicLightsMaxPerObjectCount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 4
 --- !u!114 &-3159114399229863167
 MonoBehaviour:
