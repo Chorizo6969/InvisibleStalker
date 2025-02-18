@@ -71,10 +71,10 @@ MonoBehaviour:
     m_Value: 3
   targetRasterizationResolutionWidth:
     m_OverrideState: 1
-    m_Value: 240
+    m_Value: 480
   targetRasterizationResolutionHeight:
     m_OverrideState: 1
-    m_Value: 320
+    m_Value: 640
   isDepthBufferEnabled:
     m_OverrideState: 0
     m_Value: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4315c5d81c1274fb8120ba49e62c21, type: 3}
   m_Name: LightingVolume
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   lightingIsEnabled:
     m_OverrideState: 1
     m_Value: 1
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_Value: 0.394
   saturation:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.038
   crossTalkSaturation:
     m_OverrideState: 1
     m_Value: 0.039
@@ -481,10 +481,10 @@ MonoBehaviour:
     m_Value: 0
   noiseIntensity:
     m_OverrideState: 1
-    m_Value: 0.002
+    m_Value: 0.001
   noiseSaturation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.005
   grateMaskIntensityMin:
     m_OverrideState: 1
     m_Value: 0.8
@@ -543,7 +543,7 @@ MonoBehaviour:
     m_Value: 500
   fogFalloffCurve:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 0
   heightFalloffEnabled:
     m_OverrideState: 1
     m_Value: 0
