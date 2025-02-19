@@ -1,10 +1,10 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEditor.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed;
+    public float Speed;
 
     [SerializeField]
     private Vector2 _movement;
@@ -13,6 +13,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
 
     public Transform cameraTransform;
+
+    public GameObject Player;
+    public static PlayerController Instance;
+
+    public void Awake()
+    {
+        Player = this.gameObject;
+        Instance = this;
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -34,7 +43,7 @@ public class PlayerController : MonoBehaviour
             right.Normalize();
 
 
-            Vector3 movement = (forward * _movement.y + right * _movement.x) * _speed * Time.fixedDeltaTime;
+            Vector3 movement = (forward * _movement.y + right * _movement.x) * Speed * Time.fixedDeltaTime;
 
             _rb.MovePosition(_rb.position + movement);
         }

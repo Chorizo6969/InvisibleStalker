@@ -1,21 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_FlashingState : AI_BaseState
 {
+    private float _respawnTimer = 0f;
+    private float _respawnDuration = 30f;
+
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("Entering Flashing State");
+        StateMachine.Controller.StopMoving();
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        _respawnTimer += Time.deltaTime;
+
+        if (_respawnTimer >= _respawnDuration)
+        {
+            TransitionToFollow();
+        }
+    }
+
+    public override void OnExit()
+    {
+        Debug.Log("Exiting Flashing State");
+        _respawnTimer = 0f;
     }
 }

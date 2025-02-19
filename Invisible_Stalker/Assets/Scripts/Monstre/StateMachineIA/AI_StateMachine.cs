@@ -2,48 +2,45 @@ using UnityEngine;
 
 public class AI_StateMachine : MonoBehaviour
 {
-    public AI_Sensor Sensor;
+    public Ai_Sensor Sensor;
     public AI_Controller Controller;
+    public AudioSource Source;
+    public AudioClip Clip15s;
 
     public AI_BaseState CurrentState { get; private set; }
-
+    public AI_FollowPlayerState FollowPlayerState;
     public AI_MenacingState MenacingState;
     public AI_FlashingState FlashingState;
-    public AI_FollowPlayerState FollowPlayerState;
     public AI_KillPlayerState KillPlayerState;
+
+    public GameObject Player;
 
     private void Start()
     {
-        KillPlayerState = new AI_KillPlayerState();
-        //KillPlayerState.StateMachine = this;
+        FollowPlayerState = new AI_FollowPlayerState { StateMachine = this };
+        MenacingState = new AI_MenacingState { StateMachine = this };
+        FlashingState = new AI_FlashingState { StateMachine = this };
+        KillPlayerState = new AI_KillPlayerState { StateMachine = this };
 
-        MenacingState = new AI_MenacingState();
-        //MenacingState.StateMachine = this;
-
-
-        FlashingState = new AI_FlashingState();
-        //FlashingState.StateMachine = this;
-
-        FollowPlayerState = new AI_FollowPlayerState();
-        //FollowPlayerState.StateMachine = this;
-
-        //TransitionTo(FollowPlayerState);
+        TransitionTo(FollowPlayerState); // Initial state
     }
 
-    public void TransitionTo(AI_BaseState state)
+    public void TransitionTo(AI_BaseState newState)
     {
         if (CurrentState != null)
         {
-            if (state == CurrentState) return;
             CurrentState.OnExit();
         }
 
-        CurrentState = state;
+        CurrentState = newState;
         CurrentState.OnEnter();
     }
 
     private void Update()
     {
-        CurrentState.Update();
+        if (CurrentState != null)
+        {
+            CurrentState.Update();
+        }
     }
 }

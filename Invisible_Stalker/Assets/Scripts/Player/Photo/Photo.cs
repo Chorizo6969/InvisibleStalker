@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,7 +6,8 @@ using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
 {
-    [SerializeField] private NavMeshInvisibleStalker _monster;
+    public event Action OnMonsterCatch;
+
     [SerializeField] private Camera _photoCamera;
     [SerializeField] private RenderTexture _renderTexture;
     [SerializeField] private RawImage _photoDisplay;
@@ -98,7 +100,7 @@ public class PhotoCapture : MonoBehaviour
         }
     }
 
-    private void CheckObjectsInPhoto()
+    private async void CheckObjectsInPhoto()
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_photoCamera);
         Collider[] objectsInRange = Physics.OverlapSphere(_photoCamera.transform.position, 100f, _detectionLayer);
@@ -112,11 +114,15 @@ public class PhotoCapture : MonoBehaviour
 
                 if (!Physics.Raycast(_photoCamera.transform.position, directionToObject, distanceToObject, ~_detectionLayer)) //Si le monstre est pris en photo direct
                 {
-                    _monster.StunMonster();
+                    OnMonsterCatch?.Invoke();
+                    //_monster.StunMonster();
                 }
             }
         }
-        _photoCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Monstre"));
+        _photoCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Monstre")); //Ajoute un cullingmask
+        int waiting = UnityEngine.Random.Range(500, 1000);
+        await Task.Delay(waiting);
+        _photoCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Monstre")); //enlever un cullingmask
     }
 
 }

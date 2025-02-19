@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_FollowPlayerState : AI_BaseState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("Entering FollowPlayer State");
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        if (StateMachine.Sensor.PlayerNear)
+        {
+            TransitionToMenacing();
+            return;
+        }
+
+        StateMachine.Controller.MoveTo(StateMachine.Player.transform.position);
+    }
+
+    public override void OnExit()
+    {
+        Debug.Log("Exiting FollowPlayer State");
     }
 }
