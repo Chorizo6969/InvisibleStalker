@@ -11,8 +11,6 @@ public class Pellicules : MonoBehaviour
 
     [SerializeField]
     private GameObject _outOfPicture;
-
-    public int NomberPhotoPossible;
     public static Pellicules Instance;
 
     private void Awake()
@@ -27,15 +25,6 @@ public class Pellicules : MonoBehaviour
 
     public void UpdatePhoto()
     {
-        NomberPhotoPossible = _photoCapture.NombreOfPellicule;
-        _nomberOfPellicules.text = NomberPhotoPossible.ToString();
-        if(NomberPhotoPossible == 0)
-        {
-            _outOfPicture.SetActive(true);
-        }
-        else
-        {
-            _outOfPicture.SetActive(false);
-        }
+
     }
 }

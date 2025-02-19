@@ -12,12 +12,9 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private RenderTexture _renderTexture;
     [SerializeField] private RawImage _photoDisplay;
     [SerializeField] private LayerMask _detectionLayer;
-    [SerializeField] private Pellicules _pellicules;
 
     private Texture2D _capturedPhoto;
     private bool _appareilOn;
-
-    public int NombreOfPellicule;
 
     public static PhotoCapture Instance;
 
@@ -49,17 +46,12 @@ public class PhotoCapture : MonoBehaviour
     public async void Photo(InputAction.CallbackContext context) //ClicGauche
     {
         if (!context.performed || !_appareilOn) return;
-
-        if (NombreOfPellicule > 0)
-        {
-            _photoCamera.cullingMask |= 11 << LayerMask.NameToLayer("Monstre");
-            PlayerAnimation.Instance.CancelledStatePhoto();
-            _appareilOn = false;
-            await Task.Delay(50);
-            CapturePhoto();
-
-            CheckObjectsInPhoto();
-        }
+        _photoCamera.cullingMask |= 11 << LayerMask.NameToLayer("Monstre");
+        PlayerAnimation.Instance.CancelledStatePhoto();
+        _appareilOn = false;
+        await Task.Delay(50);
+        CapturePhoto();
+        CheckObjectsInPhoto();
     }
 
     private void CapturePhoto()
@@ -85,8 +77,6 @@ public class PhotoCapture : MonoBehaviour
         }
 
         Debug.Log("Photo capturée et affichée à l'écran.");
-        NombreOfPellicule--;
-        _pellicules.UpdatePhoto();
     }
 
     private void Update()

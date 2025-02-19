@@ -28,11 +28,6 @@ public class Interaction : MonoBehaviour
                     case (6): //Interrupteur
                         hit.transform.gameObject.GetComponent<SwitchLightActive>().SwitchLight();
                         break;
-                    case (7): //Pellicules
-                        PhotoCapture.Instance.NombreOfPellicule += _nombrePhotoSupParPellicules;
-                        Pellicules.Instance.NomberPhotoPossible += _nombrePhotoSupParPellicules;
-                        Pellicules.Instance.UpdatePhoto();
-                        break;
                     case (8): //Item
                         hit.transform.gameObject.GetComponent<CarryItem>().DragItem();
                         ActualItemDrag = true;
