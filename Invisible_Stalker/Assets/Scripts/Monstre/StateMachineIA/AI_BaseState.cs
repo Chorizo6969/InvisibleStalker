@@ -8,29 +8,23 @@ public abstract class AI_BaseState
     public abstract void Update();
     public abstract void OnExit();
 
-    protected void EnterChase()
+    protected void TransitionToFollow()
     {
-        Debug.Log("Chase");
-        //StateMachine.TransitionTo(StateMachine.ChaseState);
+        StateMachine.TransitionTo(StateMachine.FollowPlayerState);
     }
 
-    protected void EnterMenacing()
+    protected void TransitionToMenacing()
     {
-        Debug.Log("Menacing");
+        StateMachine.TransitionTo(StateMachine.MenacingState);
     }
 
-    protected void EnterFlashing()
+    protected void TransitionToKillPlayer()
     {
-        Debug.Log("Flashing");
+        StateMachine.TransitionTo(StateMachine.KillPlayerState);
     }
 
-    protected void EnterFollowing()
+    protected void TransitionToFlashing()
     {
-        Debug.Log("following");
-    }
-
-    protected void EnterKilling()
-    {
-        Debug.Log("Killing");
+        StateMachine.TransitionTo(StateMachine.FlashingState);
     }
 }

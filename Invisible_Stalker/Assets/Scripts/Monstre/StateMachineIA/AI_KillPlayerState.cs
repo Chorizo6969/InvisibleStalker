@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AI_KillPlayerState : AI_BaseState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("Player Killed");
+        // anim jumpscare
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        // tkt
+    }
+
+    public override void OnExit()
+    {
+        Debug.Log("Exiting KillPlayer State");
     }
 }

@@ -25,7 +25,7 @@ public class Interaction : MonoBehaviour
             {
                 switch(hit.transform.gameObject.layer)
                 {
-                    case (6): //interrupteur
+                    case (6): //Interrupteur
                         hit.transform.gameObject.GetComponent<SwitchLightActive>().SwitchLight();
                         break;
                     case (7): //Pellicules
